@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:manektechapp/ui/widgets/restaurant_list/restaurant_list_viewmodel.dart';
 import 'package:manektechapp/ui/widgets/restaurant_list_item/restaurant_list_item_view.dart';
 import 'package:stacked/stacked.dart';
@@ -14,10 +15,25 @@ class RestaurantListView extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             itemCount: model.totalRestaurants,
             itemBuilder: (context, index) {
+              // print(
+              //     ' Index: $index, Thumb: ${model.restaurantList[index]['restaurant']['thumb']}');
+
+              if (model.totalRestaurants == 0) {
+                return Center(
+                  child: Text(
+                    'No restaurants available.',
+                    style: GoogleFonts.nunito(
+                      textStyle: Theme.of(context).textTheme.subtitle1.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                );
+              }
+
               return RestaurantListItemView(
                 // title: 'Title Number $index',
-                title: model.restaurantList[index]['restaurant']['name']
-                    .toString(),
+                restaurant: model.restaurantList[index],
               );
             },
             separatorBuilder: (context, index) {

@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:manektechapp/services/restaurant_db_service.dart';
 import 'package:manektechapp/services/restaurant_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -12,4 +13,6 @@ abstract class ThirdPartyServicesModule {
   SnackbarService get snackBarService;
   @lazySingleton
   RestaurantService get restaurantService;
+  @lazySingleton
+  RestaurantDBService get restaurantDBService;
 }
