@@ -21,6 +21,7 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
   final int totalVotes;
   final String featuredImage;
   final String photosUrl;
+  final String phoneNumbers;
   Restaurant(
       {@required this.id,
       @required this.name,
@@ -34,7 +35,8 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
       @required this.aggregateRating,
       @required this.totalVotes,
       @required this.featuredImage,
-      @required this.photosUrl});
+      @required this.photosUrl,
+      @required this.phoneNumbers});
   factory Restaurant.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -64,6 +66,8 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
           .mapFromDatabaseResponse(data['${effectivePrefix}featured_image']),
       photosUrl: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}photos_url']),
+      phoneNumbers: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}phone_numbers']),
     );
   }
   @override
@@ -108,6 +112,9 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
     if (!nullToAbsent || photosUrl != null) {
       map['photos_url'] = Variable<String>(photosUrl);
     }
+    if (!nullToAbsent || phoneNumbers != null) {
+      map['phone_numbers'] = Variable<String>(phoneNumbers);
+    }
     return map;
   }
 
@@ -145,6 +152,9 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
       photosUrl: photosUrl == null && nullToAbsent
           ? const Value.absent()
           : Value(photosUrl),
+      phoneNumbers: phoneNumbers == null && nullToAbsent
+          ? const Value.absent()
+          : Value(phoneNumbers),
     );
   }
 
@@ -165,6 +175,7 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
       totalVotes: serializer.fromJson<int>(json['totalVotes']),
       featuredImage: serializer.fromJson<String>(json['featuredImage']),
       photosUrl: serializer.fromJson<String>(json['photosUrl']),
+      phoneNumbers: serializer.fromJson<String>(json['phoneNumbers']),
     );
   }
   @override
@@ -184,6 +195,7 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
       'totalVotes': serializer.toJson<int>(totalVotes),
       'featuredImage': serializer.toJson<String>(featuredImage),
       'photosUrl': serializer.toJson<String>(photosUrl),
+      'phoneNumbers': serializer.toJson<String>(phoneNumbers),
     };
   }
 
@@ -200,7 +212,8 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
           String aggregateRating,
           int totalVotes,
           String featuredImage,
-          String photosUrl}) =>
+          String photosUrl,
+          String phoneNumbers}) =>
       Restaurant(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -215,6 +228,7 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
         totalVotes: totalVotes ?? this.totalVotes,
         featuredImage: featuredImage ?? this.featuredImage,
         photosUrl: photosUrl ?? this.photosUrl,
+        phoneNumbers: phoneNumbers ?? this.phoneNumbers,
       );
   @override
   String toString() {
@@ -231,7 +245,8 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
           ..write('aggregateRating: $aggregateRating, ')
           ..write('totalVotes: $totalVotes, ')
           ..write('featuredImage: $featuredImage, ')
-          ..write('photosUrl: $photosUrl')
+          ..write('photosUrl: $photosUrl, ')
+          ..write('phoneNumbers: $phoneNumbers')
           ..write(')'))
         .toString();
   }
@@ -261,8 +276,10 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
                                               totalVotes.hashCode,
                                               $mrjc(
                                                   featuredImage.hashCode,
-                                                  photosUrl
-                                                      .hashCode)))))))))))));
+                                                  $mrjc(
+                                                      photosUrl.hashCode,
+                                                      phoneNumbers
+                                                          .hashCode))))))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -279,7 +296,8 @@ class Restaurant extends DataClass implements Insertable<Restaurant> {
           other.aggregateRating == this.aggregateRating &&
           other.totalVotes == this.totalVotes &&
           other.featuredImage == this.featuredImage &&
-          other.photosUrl == this.photosUrl);
+          other.photosUrl == this.photosUrl &&
+          other.phoneNumbers == this.phoneNumbers);
 }
 
 class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
@@ -296,6 +314,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
   final Value<int> totalVotes;
   final Value<String> featuredImage;
   final Value<String> photosUrl;
+  final Value<String> phoneNumbers;
   const RestaurantsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -310,6 +329,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
     this.totalVotes = const Value.absent(),
     this.featuredImage = const Value.absent(),
     this.photosUrl = const Value.absent(),
+    this.phoneNumbers = const Value.absent(),
   });
   RestaurantsCompanion.insert({
     @required int id,
@@ -325,6 +345,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
     @required int totalVotes,
     @required String featuredImage,
     @required String photosUrl,
+    @required String phoneNumbers,
   })  : id = Value(id),
         name = Value(name),
         thumb = Value(thumb),
@@ -337,7 +358,8 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
         aggregateRating = Value(aggregateRating),
         totalVotes = Value(totalVotes),
         featuredImage = Value(featuredImage),
-        photosUrl = Value(photosUrl);
+        photosUrl = Value(photosUrl),
+        phoneNumbers = Value(phoneNumbers);
   static Insertable<Restaurant> custom({
     Expression<int> id,
     Expression<String> name,
@@ -352,6 +374,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
     Expression<int> totalVotes,
     Expression<String> featuredImage,
     Expression<String> photosUrl,
+    Expression<String> phoneNumbers,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -367,6 +390,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
       if (totalVotes != null) 'total_votes': totalVotes,
       if (featuredImage != null) 'featured_image': featuredImage,
       if (photosUrl != null) 'photos_url': photosUrl,
+      if (phoneNumbers != null) 'phone_numbers': phoneNumbers,
     });
   }
 
@@ -383,7 +407,8 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
       Value<String> aggregateRating,
       Value<int> totalVotes,
       Value<String> featuredImage,
-      Value<String> photosUrl}) {
+      Value<String> photosUrl,
+      Value<String> phoneNumbers}) {
     return RestaurantsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -398,6 +423,7 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
       totalVotes: totalVotes ?? this.totalVotes,
       featuredImage: featuredImage ?? this.featuredImage,
       photosUrl: photosUrl ?? this.photosUrl,
+      phoneNumbers: phoneNumbers ?? this.phoneNumbers,
     );
   }
 
@@ -443,6 +469,9 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
     if (photosUrl.present) {
       map['photos_url'] = Variable<String>(photosUrl.value);
     }
+    if (phoneNumbers.present) {
+      map['phone_numbers'] = Variable<String>(phoneNumbers.value);
+    }
     return map;
   }
 
@@ -461,7 +490,8 @@ class RestaurantsCompanion extends UpdateCompanion<Restaurant> {
           ..write('aggregateRating: $aggregateRating, ')
           ..write('totalVotes: $totalVotes, ')
           ..write('featuredImage: $featuredImage, ')
-          ..write('photosUrl: $photosUrl')
+          ..write('photosUrl: $photosUrl, ')
+          ..write('phoneNumbers: $phoneNumbers')
           ..write(')'))
         .toString();
   }
@@ -599,6 +629,17 @@ class $RestaurantsTable extends Restaurants
         minTextLength: 1, maxTextLength: 300);
   }
 
+  final VerificationMeta _phoneNumbersMeta =
+      const VerificationMeta('phoneNumbers');
+  GeneratedTextColumn _phoneNumbers;
+  @override
+  GeneratedTextColumn get phoneNumbers =>
+      _phoneNumbers ??= _constructPhoneNumbers();
+  GeneratedTextColumn _constructPhoneNumbers() {
+    return GeneratedTextColumn('phone_numbers', $tableName, false,
+        minTextLength: 1, maxTextLength: 100);
+  }
+
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -613,7 +654,8 @@ class $RestaurantsTable extends Restaurants
         aggregateRating,
         totalVotes,
         featuredImage,
-        photosUrl
+        photosUrl,
+        phoneNumbers
       ];
   @override
   $RestaurantsTable get asDslTable => this;
@@ -708,6 +750,14 @@ class $RestaurantsTable extends Restaurants
           photosUrl.isAcceptableOrUnknown(data['photos_url'], _photosUrlMeta));
     } else if (isInserting) {
       context.missing(_photosUrlMeta);
+    }
+    if (data.containsKey('phone_numbers')) {
+      context.handle(
+          _phoneNumbersMeta,
+          phoneNumbers.isAcceptableOrUnknown(
+              data['phone_numbers'], _phoneNumbersMeta));
+    } else if (isInserting) {
+      context.missing(_phoneNumbersMeta);
     }
     return context;
   }

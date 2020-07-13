@@ -20,6 +20,7 @@ class Restaurants extends Table {
   IntColumn get totalVotes => integer()();
   TextColumn get featuredImage => text().withLength(min: 1, max: 300)();
   TextColumn get photosUrl => text().withLength(min: 1, max: 300)();
+  TextColumn get phoneNumbers => text().withLength(min: 1, max: 100)();
 }
 
 @UseMoor(tables: [Restaurants])

@@ -96,7 +96,7 @@ class RestaurantDetailPortrait extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    '+91-9408393331',
+                    restaurant.phoneNumbers.toString(),
                     style: GoogleFonts.nunito(
                       textStyle: Theme.of(context).textTheme.subtitle1.copyWith(
                             fontWeight: FontWeight.w500,
@@ -304,7 +304,7 @@ class RestaurantDetailLandscape extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
-                          '+91-9408393331',
+                          restaurant.phoneNumbers,
                           style: GoogleFonts.nunito(
                             textStyle:
                                 Theme.of(context).textTheme.subtitle1.copyWith(

@@ -15,8 +15,8 @@ class RestaurantListView extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             itemCount: model.totalRestaurants,
             itemBuilder: (context, index) {
-              // print(
-              //     ' Index: $index, Thumb: ${model.restaurantList[index]['restaurant']['thumb']}');
+              print(
+                  ' Index: $index, phoneNumbers: ${model.restaurantList[index].phoneNumbers}');
 
               if (model.totalRestaurants == 0) {
                 return Center(

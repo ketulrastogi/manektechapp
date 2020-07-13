@@ -36,7 +36,7 @@ class RestaurantService with ReactiveServiceMixin {
     List<RestaurantModel> restaurantList = [...data['restaurants']]
         .map((item) => RestaurantModel.fromMap(item['restaurant']))
         .toList();
-    print(restaurantList[2].thumb.length);
+    print(restaurantList[0].phoneNumbers);
     return [...restaurantList];
   }
 
@@ -56,6 +56,7 @@ class RestaurantService with ReactiveServiceMixin {
         totalVotes: element.totalVotes,
         featuredImage: element.featuredImage,
         photosUrl: element.photosUrl,
+        phoneNumbers: element.phoneNumbers,
       );
       await _restaurantDBService.insertRestaurant(_restaurant);
     });
@@ -79,6 +80,7 @@ class RestaurantService with ReactiveServiceMixin {
               totalVotes: element.totalVotes,
               featuredImage: element.featuredImage,
               photosUrl: element.photosUrl,
+              phoneNumbers: element.phoneNumbers,
             ))
         .toList();
     return restaurantList;
